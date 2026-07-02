@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fondo del icono adaptativo — naranja MásOrange, mismo valor que
+     designsystem/theme/Color.kt (PrimaryLight). Un solo color a propósito
+     para esta Fase 1; el icono definitivo con textura queda para más
+     adelante si Pablo quiere algo más trabajado. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#FF7900" />
+</shape>

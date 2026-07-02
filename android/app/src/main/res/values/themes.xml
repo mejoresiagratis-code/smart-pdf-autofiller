@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- El theming real vive en Compose (core:designsystem/theme/Theme.kt).
+         Este estilo XML solo cubre la splash/ventana previa a que Compose
+         tome el control, evitando el "flash" blanco típico en frío. -->
+    <style name="Theme.RellenadorPdV" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
+        <item name="android:statusBarColor">@color/window_background</item>
+    </style>
+</resources>

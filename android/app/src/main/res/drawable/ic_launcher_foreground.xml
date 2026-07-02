@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Glifo simple: documento + trazo de firma, en negro sobre el fondo
+     naranja. Vale como placeholder de Fase 1 — sustituir por el icono
+     final cuando Pablo apruebe una dirección de marca definitiva. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path
+        android:fillColor="#2E1500"
+        android:pathData="M34,26 h30 l12,12 v40 a4,4 0 0 1 -4,4 h-38 a4,4 0 0 1 -4,-4 v-48 a4,4 0 0 1 4,-4 z" />
+    <path
+        android:fillColor="#FFDBB8"
+        android:pathData="M64,26 v10 a2,2 0 0 0 2,2 h10 z" />
+    <path
+        android:strokeColor="#FF7900"
+        android:strokeWidth="3.4"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M40,72 C44,60 48,80 52,68 C56,58 60,76 66,66 C70,58 72,70 78,64" />
+</vector>

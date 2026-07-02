@@ -1,0 +1,21 @@
+*.iml
+.gradle/
+/local.properties
+.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Nunca subir nada que huela a credencial
+*.keystore
+*.jks
+*credentials*
+*token*
+*.env
+!local.properties.sample
+
+# Android Studio
+*.hprof

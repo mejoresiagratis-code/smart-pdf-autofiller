@@ -1,0 +1,23 @@
+# local.properties.sample
+# ─────────────────────────────────────────────────────────────
+# Copia este archivo como "local.properties" (ya está en .gitignore) y
+# rellena los valores. Es el equivalente Android al .env que pide el
+# protocolo del proyecto: nada de credenciales hardcodeadas en el código.
+#
+# NUNCA va aquí ninguna clave de proveedor de IA (Claude/Gemini/Groq/...).
+# Esas claves siguen SOLO en ai-proxy.config.php, en el servidor — la app
+# Android nunca las ve, igual que hoy la web no las ve. Esto es solo la
+# URL pública del proxy al que la app llama por HTTPS.
+
+# Ruta al SDK de Android (la genera Android Studio automáticamente al abrir el proyecto)
+sdk.dir=/ruta/a/tu/Android/Sdk
+
+# URL del proxy multi-IA — el mismo ai-proxy.php que ya usa la web, sin tocar
+AI_PROXY_BASE_URL=https://mejoresiagratis.com/pdf/
+
+# URL del contrato base, si se prefiere descargarlo del servidor en vez de
+# empaquetarlo en assets/ (ver decisión pendiente en docs/FASE_1_ENTREGA.md)
+BASE_CONTRACT_URL=https://mejoresiagratis.com/pdf/contrato-base.pdf
+
+# Activa logging verboso de red en debug (nunca en release)
+DEBUG_NETWORK_LOGGING=true

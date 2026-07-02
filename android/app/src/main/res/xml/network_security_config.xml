@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Sustituye a la CSP de .htaccess (que no existe fuera del navegador, ver
+  auditoría §04.11). Fuerza HTTPS y prepara el terreno para certificate
+  pinning opcional sobre mejoresiagratis.com sin bloquear el arranque
+  de la Fase 1 si el pin cambia (pinning se activa en Fase con red real).
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
