@@ -1,0 +1,81 @@
+name: Android CI
+
+# Compila la APK de debug en cada push/PR a main y la publica como
+# artefacto descargable. Pensado para trabajar desde el móvil: tú subes el
+# código con la app de GitHub, y aquí se compila en la nube — ni tu móvil
+# ni ningún entorno local necesitan el Android SDK.
+#
+# El módulo core:domain es Kotlin puro y ya está cubierto por 44 tests
+# JUnit (Fase 2); se ejecutan aparte para que, si algo falla, se vea si es
+# la lógica de dominio o la parte Android/PdfBox.
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'android/**', '.github/workflows/android.yml' ]
+  pull_request:
+    branches: [ main ]
+    paths: [ 'android/**', '.github/workflows/android.yml' ]
+  workflow_dispatch: {}   # permite lanzarlo a mano desde la pestaña Actions
+
+# Todo el proyecto Gradle vive bajo android/ (no en la raíz del repo).
+defaults:
+  run:
+    working-directory: android
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Cache de Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      # El entregable no incluye el .jar binario del Gradle Wrapper (ver
+      # README §Validación). Si falta, se genera con la versión fijada en
+      # Fase 1 antes de compilar; si ya está commiteado, este paso no hace
+      # nada dañino (regenera el mismo wrapper).
+      - name: Asegurar Gradle Wrapper
+        run: |
+          if [ ! -f gradle/wrapper/gradle-wrapper.jar ]; then
+            echo "gradle-wrapper.jar no encontrado — generándolo con Gradle 8.9"
+            gradle wrapper --gradle-version 8.9
+          fi
+          chmod +x gradlew
+
+      - name: Tests de core:domain (JUnit)
+        run: ./gradlew :core:domain:test --stacktrace
+
+      - name: Compilar APK de debug
+        run: ./gradlew :app:assembleDebug --stacktrace
+
+      - name: Publicar la APK como artefacto
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rellenador-pdv-debug-apk
+          path: android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 14
+
+      # Si el build falla, subimos los informes de test para poder
+      # diagnosticar desde el móvil sin tener que reproducir en local.
+      - name: Publicar informes en caso de fallo
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: informes-fallo
+          path: |
+            android/**/build/reports/**
+            android/**/build/test-results/**
+          retention-days: 14
