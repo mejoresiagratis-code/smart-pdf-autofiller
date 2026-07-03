@@ -59,8 +59,7 @@ android/
 - Las claves de los 9 proveedores de IA **no viven en la app**, nunca han
   vivido ni deben vivir. Siguen solo en `ai-proxy.config.php`, en el
   servidor — la app solo conoce la URL pública del proxy.
-- Si en algún momento un token o clave se pega por error en un chat o un
-  commit, se da por comprometido y se revoca — no se reutiliza.
+
 
 ## Siguiente fase
 
